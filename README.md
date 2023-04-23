@@ -1,14 +1,14 @@
 # AppvarTextEditor
-This utility is designed to make developping Programs on the [TI 83 Premium CE](https://en.wikipedia.org/wiki/TI-83_Premium_CE) / [TI 84 Plus CE](https://en.wikipedia.org/wiki/TI-84_Plus_series#TI-84_Plus_CE_and_TI-84_Plus_CE-T) easier !  
+This utility is designed to make developing Programs on the [TI 83 Premium CE](https://en.wikipedia.org/wiki/TI-83_Premium_CE) / [TI 84 Plus CE](https://en.wikipedia.org/wiki/TI-84_Plus_series#TI-84_Plus_CE_and_TI-84_Plus_CE-T) easier !  
 The TI only has 256ko RAM and only 156ko is usable by your program (nearly 100ko is used by the system)  
-A lot of utilities already exists to keep the programm's size as small as possible.  
+A lot of utilities already exists to keep the program's size as small as possible.  
 **And here's come AppvarTextEditor !**  
 Strings can take a lot of space in your program.  
 ATE allows you to store a lot of text without increasing the program's size !  
 ## How ?
 You can store any data on an AppVar (files on the calculator) including strings.  
 But, if the file is stored in the Archive (FLASH), you don't need any extra RAM to read the data !  
-- ATE provides you two C sources you can easily include in your program which provides ONE fuction to load a string!  
+- ATE provides you two C sources you can easily include in your program which provides ONE function to load a string!  
 - ATE has a **graphical interface** to make the creation of these Appvars easier : edit text, import and export easily on your PC!  
 You can even preview the default GFX font or use your own !
 ## Get Started
@@ -24,8 +24,8 @@ You just have to use the function ``get_string_pointer(const char file_name[9], 
 This functions returns a pointer of the desired string which can be used directly.
 NOTE : 
 - If the Appvar is in Archive (recommended), the pointer returned by this function is **READ ONLY** !  
-Trying to write data at this pointer will causes a RAM reset and restarts the device !
-- The pointer returned MAY BE NULL, expecially if the file doesn't exist !
+Trying to write data at this pointer will cause a RAM reset and restarts the device !
+- The pointer returned MAY BE NULL, especially if the file doesn't exist !
 - The function has been built to be the most optimized way, so it doesn't check if the index or header length passed are correct ! Putting wrong data in it will get the pointers corrupt !
 
 <!-- end of the list -->
