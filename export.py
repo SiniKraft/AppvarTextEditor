@@ -130,14 +130,20 @@ def export_as_appvar(mw: "MainWindow", path):
     # For an explanation on how the following works, please refer to the PNG 'ATE Explained.png'
     if mw.lineEdit_2.text() == "":
         _show_finish_message(mw, "Please input a name")  # small security check
-    for x in range(0, mw.listWidget.count()):
-        line_text = mw.listWidget.item(x).text()
+
+    for x in range(0, mw.listWidget.count()):  # converting text to bytes
+        line_text = mw.listWidget.item(x).text()\
+            .replace(chr(256), chr(9)).replace(chr(257), chr(10)).replace(chr(258), chr(13)).replace(chr(259), chr(14))
+        # patching incorrect and placeholder chars
         header_list.append(struct.pack("B", len(line_text) + 1))  # B = Unsigned char
         str_list.append(bytes(line_text + chr(0), "cp1252"))
+
     header_list[0] = struct.pack("B", len(header_list))  # editing first byte containing header length
     final_bytes = bytes(mw.lineEdit.text(), "cp1252")  # adding header string first
+
     for byte_group in (header_list + str_list):
         final_bytes = final_bytes + byte_group  # finally build the file content by converting list of bytes to bytes
+
     try:
         with open(path + ".bin.tmp", "wb") as file:  # writing bin file to be converted by convbin utility to 8xv
             file.write(final_bytes)

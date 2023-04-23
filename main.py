@@ -35,7 +35,18 @@ class SelectCharacterDialog(QDialog, Ui_SelectCharacterDialog):
         tmp_text = r""
         for i_ in range(1, 256):
             tmp_text = tmp_text + chr(i_)  # fill in with characters from 0x01 to 0xFF
-        self.plainTextEdit.setPlainText(tmp_text)
+        # fix some characters (which cannot be printed, such as 9,10,13,14)
+        l = [9, 10, 13, 14]
+        x = 256
+        final_text = ""
+        for c in tmp_text:  # not really optimized, but here we don't care
+            for i in l:
+                if c == chr(i):
+                    c = chr(x)
+                    x += 1
+            final_text += c
+
+        self.plainTextEdit.setPlainText(final_text)
         self.plainTextEdit.setFont(font)
 
 
